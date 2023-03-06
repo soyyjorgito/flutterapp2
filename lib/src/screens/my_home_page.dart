@@ -11,43 +11,33 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       key: _scaffKey,
       appBar: AppBar(
-        title: const Text('Uso del Drawer'),
+        title: const Text('Mostrar un Snackbar'),
       ),
-      body: const Center(
-        child: Text('Hola'),
-      ),
-      drawer: _getDrawer(context),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.menu),
-        onPressed: () => _scaffKey.currentState?.openDrawer(),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            final snackBar = SnackBar(
+                backgroundColor: Colors.black,
+                content: Row(
+                  children: const [
+                    Icon(Icons.thumb_up,color: Colors.white),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text('Elemento eliminado')
+                  ],
+                ),
+                action: SnackBarAction(
+                    label: "Cancelar",
+                    onPressed: () {
+                      print("Cancelado");
+                    }));
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+          child: const Text('Mostrar SnackBar'),
+        ),
       ),
     );
   }
-
-  Widget _getDrawer(BuildContext context) {
-    return Drawer(
-        child: ListView(children: <Widget>[
-      UserAccountsDrawerHeader(
-        accountEmail: const Text("jorge08432@hotmail.com"),
-        accountName: const Text("Jorge Eslava"),
-        currentAccountPicture: const FlutterLogo(),
-        otherAccountsPictures: <Widget>[
-        ],
-        onDetailsPressed:(){},
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [Colors.blue, Color.fromARGB(255, 2, 69, 145)],
-          end: Alignment.bottomRight)
-        ),
-      ),
-      ListTile(
-        title: const Text("Inicio"),
-        leading: const Icon(Icons.home),
-        onTap: () => showHome(context),
-      )
-    ]));
-  }
-}
-
-void showHome(BuildContext context) {
-  Navigator.pop(context);
 }
