@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:drawer/main.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -11,47 +10,28 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       key: _scaffKey,
       appBar: AppBar(
-        title: const Text('Mostrar un AlertDialog'),
+        title: const Center(child:Text('Animación Hero',style: TextStyle(color:Colors.black),)),
+        backgroundColor: Colors.white,
       ),
-      body: Center(
-          child: TextButton(
-        child: const Text("Mostrar"),
-        onPressed: () {
-          _showDialog(context);
-        },
-      )),
+      body: ListView.builder(
+          itemCount: 25,
+          itemBuilder: (context, index) {
+            final url = "https://picsum.photos/id/$index/400/300";
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed("/second", arguments: url);
+              },
+              child: Hero(
+                tag: url,
+                child: Card(
+                  child: FadeInImage(
+                  image: NetworkImage(url),
+                  placeholder: const AssetImage("assets/loading.gif"),
+                  height: 300,
+                )),
+              ),
+            );
+          }),
     );
-  }
-
-  void _showDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-           title: const Center(child: Text('Alerta')),
-            content: const Text("¿Seguro deseas eliminar el elemento?"),
-            actions: [
-              Column(
-                children: [
-                  TextButton(
-                    child: const Text("No"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  TextButton(
-                    child: const Text("Si"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              )
-            ],
-            actionsAlignment: MainAxisAlignment.center,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          );
-        });
   }
 }
