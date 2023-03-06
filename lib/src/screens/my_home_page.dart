@@ -10,7 +10,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       key: _scaffKey,
       appBar: AppBar(
-        title: const Center(child:Text('Animación Hero',style: TextStyle(color:Colors.black),)),
+        title: const Center(child:Text('Imagenes',style: TextStyle(color:Colors.black),)),
         backgroundColor: Colors.white,
       ),
       body: ListView.builder(
