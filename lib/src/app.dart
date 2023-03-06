@@ -1,4 +1,4 @@
-import 'package:drawer/src/screens/secondpage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:drawer/src/screens/my_home_page.dart';
 
@@ -8,12 +8,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App', 
+      title: 'Image Picker Demo', 
       initialRoute: "/",
       routes: 
       {
-        "/": (BuildContext context) => MyHomePage(),
-        "/second": (BuildContext context) => SecondPage(),
+        "/": (BuildContext context) => const MyHomePage(title: 'Escoger imagen'),
       }
       );
   }
