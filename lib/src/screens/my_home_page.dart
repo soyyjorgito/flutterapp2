@@ -11,7 +11,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       key: _scaffKey,
       appBar: AppBar(
-        title: const Text('Mostrar un SimpleDialog'),
+        title: const Text('Mostrar un AlertDialog'),
       ),
       body: Center(
           child: TextButton(
@@ -27,27 +27,30 @@ class MyHomePage extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return SimpleDialog(
-            title: const Text("Seleccionar"),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            contentPadding: const EdgeInsets.only(left:50),
-            titlePadding: const EdgeInsets.only(left:80),
-            children: [
-              ListTile(
-                title: const Text("Eliminar"),
-                leading: const Icon(Icons.delete),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text("Editar"),
-                leading: const Icon(Icons.edit),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+          return AlertDialog(
+           title: const Center(child: Text('Alerta')),
+            content: const Text("¿Seguro deseas eliminar el elemento?"),
+            actions: [
+              Column(
+                children: [
+                  TextButton(
+                    child: const Text("No"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  TextButton(
+                    child: const Text("Si"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
               )
-            ]
+            ],
+            actionsAlignment: MainAxisAlignment.center,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           );
         });
   }
